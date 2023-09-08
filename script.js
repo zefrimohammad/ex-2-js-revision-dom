@@ -144,7 +144,7 @@ let objectsTable = [
 
 
 let produitDropDown = document.createElement("div");
-produitDropDown.style.cssText += `width: 70%;`;
+produitDropDown.style.cssText += `width: 70%; position: relative; margin-right: 4px;`;
 produitDropDown.classList.add("drop-down-menu");
 
 
@@ -152,24 +152,50 @@ let titCon = document.createElement("div");
 
 let tit = document.createElement("div");
 tit.appendChild(document.createTextNode(`${objectsTable[0].nom}`));
-tit.style.padding = `7px 0px`;
 
 let arrow = document.createElement("div");
 arrow.appendChild(document.createTextNode(`▾`));
 
 let optionsCon = document.createElement("div");
+optionsCon.style.cssText += `position: absolute;
+                            left: 0px;
+                            top: 33px;
+                            width: 100%;
+                            background-color: rgb(255, 255, 255);
+                            border-radius: 9px;`;
+
 optionsCon.style.display = `none`;
 
 objectsTable.forEach(function(o){
     let op = document.createElement("div");
     op.setAttribute("value", `${o.prix}`);
-    op.style.cssText = `padding: 7px 0px;`;
+    op.style.cssText = `padding-top: 7px; padding-bottom: 7px; padding-left: 7px;`;
     op.appendChild(document.createTextNode(`${o.nom}`));
     optionsCon.appendChild(op);
 })
 
 titCon.append(tit, arrow);
-titCon.style.cssText = `display: flex; flex-direction: row; justify-content: space-between; align-items: center; cursor: pointer;`;
+titCon.setAttribute("id", "tC");
+titCon.setAttribute("tabindex", 0);
+
+titCon.style.cssText = `display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        gap: 45px;
+                        cursor: pointer;
+                        height: 33px;
+                        border-radius: 9px;
+                        outline: none;
+                        background-color: rgb(255, 255, 255);
+                        font-size: 15px;
+                        padding-left: 8px;
+                        padding-right: 8px;`;
+
+
+
+
+
 produitDropDown.append(titCon, optionsCon);
 
 titCon.addEventListener("click", function(){
@@ -191,7 +217,7 @@ optionsCon.childNodes.forEach(function(opti) {
         optionsCon.style.display = "none";
     });
     opti.addEventListener("mouseenter", () => opti.style.backgroundColor = `rgb(128, 128, 128)`);
-    opti.addEventListener("mouseleave", () => opti.style.backgroundColor = `#fffbec`);
+    opti.addEventListener("mouseleave", () => opti.style.backgroundColor = `revert`);
 });
 
 
